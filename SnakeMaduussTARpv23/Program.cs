@@ -11,36 +11,25 @@ namespace SnakeMaduussTARpv23
     {
         static void Main(string[] args)
         {
-            Point p1 = new Point(1, 3, '*');
-            p1.Draw();
+            Console.SetBufferSize(80, 25);
 
-            Point p2 = new Point(4, 5, '#');
-            p2.Draw();
+            HorizontalLine upLine = new HorizontalLine(0, 78, 0, '+');
+            HorizontalLine downLine = new HorizontalLine(0, 78, 24, '+');
 
-            HorizontalLine line = new HorizontalLine();
-            line.Drow();
+            VerticalLine leftLine = new VerticalLine(0, 24, 0, '+');
+            VerticalLine rightLine = new VerticalLine(0, 24, 78, '+');
 
-            List<int> numList = new List<int>();
-            numList.Add(0);
-            numList.Add(1);
-            numList.Add(2);
+            upLine.Drow();
+            downLine.Drow();
+            leftLine.Drow();
+            rightLine.Drow();
 
-            int x = numList[ 0 ];
-            int y = numList[ 1 ];
-            int z = numList[ 2 ];
+            Point p = new Point(4, 5, '*');
+            p.Draw();
 
-            foreach(int i in numList)
-            {
-                Console.WriteLine( i );
-            }
-            numList.Remove( 0 );
-            
-            List<Point> plist = new List<Point>();
-
-            plist.Add( p1 );
-            plist.Add( p2 );
-
-            Console.ReadLine();
+            Emploee e = new Emploee();
+            e.age = 42;
+            e.pay = 300000;
         }
     }
 }
