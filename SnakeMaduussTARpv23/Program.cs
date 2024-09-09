@@ -17,6 +17,9 @@ namespace SnakeMaduussTARpv23
             Point p2 = new Point(4, 5, '#');
             p2.Draw();
 
+            HorizontalLine line = new HorizontalLine();
+            line.Drow();
+
             List<int> numList = new List<int>();
             numList.Add(0);
             numList.Add(1);
