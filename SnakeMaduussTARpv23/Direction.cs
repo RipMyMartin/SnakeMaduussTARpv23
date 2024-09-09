@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace SnakeMaduussTARpv23
 {
-    internal class Humans
+    enum Direction
     {
-        public int age;
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN
     }
 }
