@@ -48,7 +48,31 @@ namespace SnakeMaduussTARpv23
                     snake.HandleKey(key.Key);
                 }
             }
+            WriteGameOver();
             Console.ReadLine();
+
+
+            static void WriteGameOver()
+            {
+                int xOffset = 25;
+                int yOffset = 8;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.SetCursorPosition(xOffset, yOffset++);
+                WriteText("============================", xOffset, yOffset++);
+                WriteText("                            ", xOffset + 1, yOffset++);
+                WriteText("   G A M E     O V E R     ", xOffset + 2, yOffset++);
+                yOffset++;
+                WriteText("   Autor: Martin Sild", xOffset + 2, yOffset++);
+                WriteText("                            ", xOffset + 1, yOffset++);
+                WriteText("============================", xOffset, yOffset++);
+            }
+
+            static void WriteText(String text, int xOffset, int yOffset)
+            {
+                Console.SetCursorPosition(xOffset, yOffset);
+                Console.WriteLine(text);
+            }
+
         }
     }
 }
