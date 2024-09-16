@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using NAudio.Wave;
-
 
 namespace SnakeMaduussTARpv23
 {
@@ -24,7 +19,7 @@ namespace SnakeMaduussTARpv23
             Walls walls = new Walls(80, 25);
             walls.Draw();
 
-            // Отрисовка точек			
+            // Отрисовка точек
             Point p = new Point(4, 5, '*');
             Snake snake = new Snake(p, 4, Direction.RIGHT);
             snake.Draw();
@@ -32,6 +27,9 @@ namespace SnakeMaduussTARpv23
             FoodCreator foodCreator = new FoodCreator(80, 25, '$');
             Point food = foodCreator.CreateFood();
             food.Draw();
+
+            // Создаем проигрыватель для еды
+            IWavePlayer eatSoundPlayer = new WaveOutEvent();
 
             while (true)
             {
@@ -41,6 +39,9 @@ namespace SnakeMaduussTARpv23
                 }
                 if (snake.Eat(food))
                 {
+                    // Воспроизводим звук при поедании еды
+                    PlayEatSound();
+
                     food = foodCreator.CreateFood();
                     food.Draw();
                 }
@@ -58,7 +59,6 @@ namespace SnakeMaduussTARpv23
             }
             WriteGameOver();
             Console.ReadLine();
-
 
             static void WriteGameOver()
             {
@@ -80,8 +80,24 @@ namespace SnakeMaduussTARpv23
                 Console.Write(text);
             }
 
+            static void PlayEatSound()
+            {
+                var eatSoundPlayer = new WaveOutEvent();
+                var eatSoundReader = new AudioFileReader("../../../BadBone.mp3");
 
+                eatSoundPlayer.Init(eatSoundReader);
+                eatSoundPlayer.Play();
+                Task.Run(() =>
+                {
+                    while (eatSoundPlayer.PlaybackState == PlaybackState.Playing)
+                    {
+                        Thread.Sleep(100);
+                    }
 
-        }
+                    eatSoundPlayer.Dispose();
+                    eatSoundReader.Dispose();
+                });
+            }
+        }+
     }
 }
